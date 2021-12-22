@@ -1,0 +1,26 @@
+﻿@page "/{category}"
+@model CategoryModel
+@{
+    Layout = "_TwoColumn";
+    ViewData["Title"] = "Blogger - Gaming";
+}
+@section Stylesheets {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+
+<div class="contentContainer">Post Here</div>
+<div class="postForm">
+    <form class="formInput" action="" method="post">
+      <ul>
+        <li> 
+            <label for="authorInput">Name:</label>
+            <input id="authorInput" name="author" required></input>
+        </li>
+        <li> 
+            <label for="inputBox">Comment:</label>
+            <textarea id="inputBox" name="text" required></textarea>
+        </li>
+        <button>Send</button> 
+      </ul>
+    </form>
+</div>

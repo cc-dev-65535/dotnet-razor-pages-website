@@ -1,0 +1,36 @@
+﻿.leftLayoutContainer {
+    flex: 3;
+    border: 2px solid #ccc;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentContainer {
+    border: 2px solid #ccc;
+    margin: 10px;
+}
+
+.postForm {
+    border: 2px solid #ccc;
+    margin: 10px;
+}
+
+.sidebar {
+    flex: 1;
+    border: 2px solid #ccc;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebarItem {
+    margin: 10px;
+}
+
+.flexLayoutContainer {
+    max-width: 100%;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+}

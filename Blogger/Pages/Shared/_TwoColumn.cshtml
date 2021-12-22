@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "_Layout";
+}
+@section Stylesheets {
+    @await RenderSectionAsync("Stylesheets", required: false)
+}
+@section Scripts {
+
+}
+
+<div class="flexLayoutContainer">
+    <div class="leftLayoutContainer">
+        @RenderBody()
+    </div>
+    <div class="sidebar">
+         <div class="sidebarItem"><a asp-page="/Index">Gaming</a></div>
+         <div class="sidebarItem"><a asp-page="/Index">Sports</a></div>
+         <div class="sidebarItem"><a asp-page="/Index">Politics</a></div>
+         <div class="sidebarItem"><a asp-page="/Index">News</a></div>
+    </div>
+</div>
