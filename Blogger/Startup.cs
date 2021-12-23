@@ -11,8 +11,8 @@ public class Startup
         services.AddRazorPages()
                 .AddRazorPagesOptions(opts =>
                 {
-                    opts.Conventions.AddPageRoute("/Index", "/page/{pageno:int}");
-                    opts.Conventions.AddPageRoute("/Topic", "/{category}/page/{pageno:int}");
+                    //opts.Conventions.AddPageRoute("/Index", "/page/{pageno:int}");
+                    //opts.Conventions.AddPageRoute("/Category", "/{category}/page/{pageno:int}");
                 });
         services.Configure<RouteOptions>(options =>
         {

@@ -13,9 +13,9 @@
         @RenderBody()
     </div>
     <div class="sidebar">
-         <div class="sidebarItem"><a asp-page="/Index">Gaming</a></div>
-         <div class="sidebarItem"><a asp-page="/Index">Sports</a></div>
-         <div class="sidebarItem"><a asp-page="/Index">Politics</a></div>
-         <div class="sidebarItem"><a asp-page="/Index">News</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">Gaming</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">Sports</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">Politics</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">News</a></div>
     </div>
 </div>

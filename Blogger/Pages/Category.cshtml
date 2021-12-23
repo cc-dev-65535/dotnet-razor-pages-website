@@ -2,25 +2,33 @@
 @model CategoryModel
 @{
     Layout = "_TwoColumn";
-    ViewData["Title"] = "Blogger - Gaming";
+    ViewData["Title"] = $"Blogger - {Model.pageCategory}";
+    ViewData["Category"] = Model.pageCategory;
 }
 @section Stylesheets {
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 }
 
-<div class="contentContainer">Post Here</div>
+<div class="contentContainer">
+   @foreach(var article in Model.Articles) {
+       <p>@article.Author</p>
+       <p>@article.Text</p>
+   }
+</div>
 <div class="postForm">
     <form class="formInput" action="" method="post">
       <ul>
         <li> 
-            <label for="authorInput">Name:</label>
-            <input id="authorInput" name="author" required></input>
+            <label asp-for="authorInput">Name:</label>
+            <input class="formControl" asp-for="authorInput" name="author" />
+            <span asp-validation-for="authorInput"></span>
         </li>
         <li> 
-            <label for="inputBox">Comment:</label>
-            <textarea id="inputBox" name="text" required></textarea>
+            <label asp-for="inputBox">Comment:</label>
+            <textarea class="formControl" asp-for="inputBox" name="text"></textarea>
+            <span asp-validation-for="inputBox"></span>
         </li>
-        <button>Send</button> 
+        <button class="btn-primary">Send</button> 
       </ul>
     </form>
 </div>

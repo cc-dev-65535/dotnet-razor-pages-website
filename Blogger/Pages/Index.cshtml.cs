@@ -9,9 +9,6 @@ namespace Blogger.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        //[BindProperty]
-        //public InputModel Input { get; set; }
-
         public List<string> Items { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -19,16 +16,9 @@ namespace Blogger.Pages
             _logger = logger;
         }
 
-        public void OnGet(int pageno)
+        public void OnGet()
         {
 
         }
-        /*
-        public class InputModel
-        {
-            public string Topic { get; set; }
-            public string Username { get; set; }
-        }
-        */
     }
 }
