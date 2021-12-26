@@ -34,3 +34,14 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.article {
+    border: 1px solid #ccc;
+    margin: 5px;
+}
+
+.formList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}

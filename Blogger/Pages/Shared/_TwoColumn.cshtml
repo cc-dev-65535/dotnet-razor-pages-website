@@ -5,7 +5,7 @@
     @await RenderSectionAsync("Stylesheets", required: false)
 }
 @section Scripts {
-
+    @await RenderSectionAsync("Scripts", required: false)
 }
 
 <div class="flexLayoutContainer">
@@ -13,9 +13,9 @@
         @RenderBody()
     </div>
     <div class="sidebar">
-        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">Gaming</a></div>
-        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">Sports</a></div>
-        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">Politics</a></div>
-        <div class="sidebarItem"><a asp-page="/Category" asp-route-cateory="@ViewData["Category"]">News</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-category="gaming">Gaming</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-category="sports">Sports</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-category="politics">Politics</a></div>
+        <div class="sidebarItem"><a asp-page="/Category" asp-route-category="news">News</a></div>
     </div>
 </div>

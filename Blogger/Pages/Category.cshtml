@@ -2,31 +2,42 @@
 @model CategoryModel
 @{
     Layout = "_TwoColumn";
-    ViewData["Title"] = $"Blogger - {Model.pageCategory}";
-    ViewData["Category"] = Model.pageCategory;
+    ViewData["Title"] = $"Blogger - {Model.PageCategory}";
+    //ViewData["Category"] = Model.PageCategory;
 }
 @section Stylesheets {
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 }
+@section Scripts{
+    @Html.PartialAsync("_ValidationScriptsPartial")
+}
 
 <div class="contentContainer">
    @foreach(var article in Model.Articles) {
-       <p>@article.Author</p>
-       <p>@article.Text</p>
+       <div class="article">
+        <p>@article.Author</p>
+        <p>@article.Title</p>
+        <p>@article.Text</p>
+       </div>
    }
 </div>
 <div class="postForm">
-    <form class="formInput" action="" method="post">
-      <ul>
+    <form class="formInput" method="post">
+      <ul class=formList>
         <li> 
-            <label asp-for="authorInput">Name:</label>
-            <input class="formControl" asp-for="authorInput" name="author" />
-            <span asp-validation-for="authorInput"></span>
+            <label asp-for="Input.Author"></label>
+            <input class="formControl" asp-for="Input.Author" />
+            <span asp-validation-for="Input.Author"></span>
         </li>
         <li> 
-            <label asp-for="inputBox">Comment:</label>
-            <textarea class="formControl" asp-for="inputBox" name="text"></textarea>
-            <span asp-validation-for="inputBox"></span>
+            <label asp-for="Input.Title"></label>
+            <input class="formControl" asp-for="Input.Title" />
+            <span asp-validation-for="Input.Title"></span>
+        </li>
+        <li> 
+            <label asp-for="Input.Text"></label>
+            <textarea class="formControl" asp-for="Input.Text"></textarea>
+            <span asp-validation-for="Input.Text"></span>
         </li>
         <button class="btn-primary">Send</button> 
       </ul>
