@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace Blogger.Pages
 {
@@ -14,7 +15,7 @@ namespace Blogger.Pages
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public List<InputModel> Articles { get; set; }
+        public ICollection<ArticleViewModel> Articles { get; set; }
         public string PageCategory { get; set; }
 
         public CategoryModel(ILogger<CategoryModel> logger, ArticleService articleService)
@@ -23,28 +24,27 @@ namespace Blogger.Pages
             _articleService = articleService;
         }
 
-        public void OnGet(string category)
+        public async Task OnGetAsync(string category)
         {
             PageCategory = category;
 
-            Articles = new List<InputModel>();
-            InputModel article = new InputModel { Author = "a", Title = "b", Text = "b" };
-            Articles.Add(article);
+            Articles = await _articleService.GetArticles(PageCategory);
         }
 
-        public IActionResult OnPost(string category)
+        public async Task<IActionResult> OnPostAsync(string category)
         {
             PageCategory = category;
 
-            Articles = new List<InputModel>();
-            //InputModel article = new InputModel { Author = "a", Title = "b", Text = "b" };
 
             if (!ModelState.IsValid)
             {
+                Articles = await _articleService.GetArticles(PageCategory);
+
                 return Page();
             }
 
-            _articleService.CreateArticle(Input);
+            await _articleService.CreateArticle(Input, PageCategory);
+            Articles = await _articleService.GetArticles(PageCategory);
             return RedirectToPage("Category", new { category = category });
         }
 
