@@ -9,6 +9,7 @@ namespace Blogger.Pages
     public class CategoryModel : PageModel
     {
         private readonly ILogger<CategoryModel> _logger;
+        private readonly ArticleService _articleService;
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -16,9 +17,10 @@ namespace Blogger.Pages
         public List<InputModel> Articles { get; set; }
         public string PageCategory { get; set; }
 
-        public CategoryModel(ILogger<CategoryModel> logger)
+        public CategoryModel(ILogger<CategoryModel> logger, ArticleService articleService)
         {
             _logger = logger;
+            _articleService = articleService;
         }
 
         public void OnGet(string category)
@@ -35,14 +37,14 @@ namespace Blogger.Pages
             PageCategory = category;
 
             Articles = new List<InputModel>();
-            InputModel article = new InputModel { Author = "a", Title = "b", Text = "b" };
-            Articles.Add(article);
+            //InputModel article = new InputModel { Author = "a", Title = "b", Text = "b" };
 
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            _articleService.CreateArticle(Input);
             return RedirectToPage("Category", new { category = category });
         }
 

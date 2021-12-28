@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Blogger;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 public class Startup
 {
@@ -20,6 +23,11 @@ public class Startup
             options.LowercaseUrls = true;
             options.LowercaseQueryStrings = true;
         });
+        services.AddScoped<ArticleService>();
+        //services.AddScoped<AppDbContext>();
+        string connString = "server=localhost;database=Articles;user=root;password=imgmongouser";
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 27, 1));
+        services.AddDbContext<AppDbContext>(options => options.UseMySql(connString, serverVersion));
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
