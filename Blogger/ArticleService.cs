@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace Blogger
             var article = new Article
             {
                 Author = input.Author,
+                Timestamp = DateTime.Now,
                 Category = pageCategory,
                 Title = input.Title,
                 Text = input.Text,
@@ -34,12 +36,15 @@ namespace Blogger
             {
                 return await _appDbContext.Articles
                                  //.Where(a => !a.IsDeleted)
+                                 .OrderByDescending(a => a.Timestamp)
                                  .Select(a => new ArticleViewModel
                                  {
                                      Author = a.Author,
-                                     Category = a.Category,
+                                     Category = a.Category.ToUpper(),
                                      Title = a.Title,
-                                     Text = a.Text
+                                     Text = a.Text,
+                                     //Timestamp = HelperFunctions.FormatDate(a.Timestamp)
+                                     Timestamp = a.Timestamp.ToString("t") + " " + a.Timestamp.ToString("MMM,dd,yyyy")
                                  })
                                 .ToListAsync();
             }
@@ -47,14 +52,31 @@ namespace Blogger
             return await _appDbContext.Articles
                                  //.Where(a => !a.IsDeleted)
                                  .Where(a => a.Category.Equals(pageCategory))
+                                 .OrderByDescending(a => a.Timestamp)
                                  .Select(a => new ArticleViewModel
                                  {
                                      Author = a.Author,
-                                     Category = a.Category,
+                                     Category = a.Category.ToUpper(),
                                      Title = a.Title,
-                                     Text = a.Text
+                                     Text = a.Text,
+                                     //Timestamp = HelperFunctions.FormatDate(a.Timestamp)
+                                     Timestamp = a.Timestamp.ToString("t") + " " + a.Timestamp.ToString("MMM,dd,yyyy")
                                  })
                                 .ToListAsync();
+        }
+    }
+
+    public class HelperFunctions
+    {
+        public static string FormatDate(DateTime date)
+        {
+            string[] monthNames = new string[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            int year = date.Year;
+            string month = monthNames[date.Month-1];
+            int day = date.Day;
+            int hour = date.Hour;
+            int minute = date.Minute;
+            return $"{hour}:{minute} {month}-{day}-{year}";
         }
     }
 }

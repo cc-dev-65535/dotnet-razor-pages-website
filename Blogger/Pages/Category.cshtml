@@ -15,10 +15,12 @@
 <div class="contentContainer">
    @foreach(var article in Model.Articles) {
        <div class="article">
-        <p>@article.Author</p>
-        <p>@article.Category</p>
-        <p>@article.Title</p>
-        <p>@article.Text</p>
+           <div class=headerContainer>
+                <h2>@article.Title</h2>
+                <small>@article.Category</small>
+           </div>
+           <small>@article.Author - @article.Timestamp</small>
+           <p>@article.Text</p>
        </div>
    }
 </div>
@@ -37,10 +39,12 @@
         </li>
         <li> 
             <label asp-for="Input.Text"></label>
-            <textarea class="formControl" asp-for="Input.Text"></textarea>
+            <textarea class="formTextControl" asp-for="Input.Text"></textarea>
             <span asp-validation-for="Input.Text"></span>
         </li>
+        <li>
+            <button class="btn-primary">Send</button>
+        </li>
       </ul>
-      <button class="btn-primary">Send</button> 
     </form>
 </div>

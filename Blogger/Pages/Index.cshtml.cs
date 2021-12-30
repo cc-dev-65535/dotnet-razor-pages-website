@@ -21,7 +21,6 @@ namespace Blogger.Pages
 
         public async Task OnGetAsync()
         {
-
             Articles = await _articleService.GetArticles();
         }
     }
