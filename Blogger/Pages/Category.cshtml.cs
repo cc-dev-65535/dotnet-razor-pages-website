@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Blogger.Pages
 {
+    [EnsureValidCategoryAttribute]
     public class CategoryModel : PageModel
     {
         private readonly ILogger<CategoryModel> _logger;
@@ -29,6 +33,7 @@ namespace Blogger.Pages
             PageCategory = category;
 
             Articles = await _articleService.GetArticles(PageCategory);
+
         }
 
         public async Task<IActionResult> OnPostAsync(string category)
@@ -51,12 +56,12 @@ namespace Blogger.Pages
         public class InputModel
         {
             [Required]
-            [StringLength(40, ErrorMessage = "Maximum length is {1}")]
+            [StringLength(50, ErrorMessage = "Maximum length is {1}")]
             [Display(Name = "Author")]
             public string Author { get; set; }
 
             [Required]
-            [StringLength(40, ErrorMessage = "Maximum length is {1}")]
+            [StringLength(50, ErrorMessage = "Maximum length is {1}")]
             [Display(Name = "Title")]
             public string Title { get; set; }
 
@@ -64,6 +69,29 @@ namespace Blogger.Pages
             [StringLength(500, ErrorMessage = "Maximum length is {1}")]
             [Display(Name = "Text")]
             public string Text { get; set; }
+        }
+    }
+
+    public class EnsureValidCategoryAttribute: Attribute, IPageFilter
+    {
+        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+        {
+            
+        }
+
+        public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+        {
+            Regex regex = new Regex(@"^(gaming|sports|politics|news)$");
+            var category = (string) context.HandlerArguments["category"];
+            if (!regex.IsMatch(category))
+            {
+                context.Result = new NotFoundResult();
+            }
+        }
+
+        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+        { 
+        
         }
     }
 }

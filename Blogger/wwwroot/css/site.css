@@ -15,7 +15,7 @@ button, input, select, textarea {
 }
 
 html {
-  font-size: 14px;
+  font-size: 10px;
 }
 
 @media (min-width: 768px) {
@@ -93,4 +93,8 @@ nav {
 
 footer {
     background-color: #ADD8E6;
+}
+
+.nav-link {
+    margin-left: 5px;
 }
