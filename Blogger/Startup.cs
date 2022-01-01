@@ -32,9 +32,9 @@ public class Startup
             options.LowercaseQueryStrings = true;
         });
         services.AddScoped<ArticleService>();
-        //string connString = "server=localhost;database=Articles;user=root;password=imgmongouser";
         var connString = Configuration.GetConnectionString("DefaultConnection");
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 27, 1));
+        //Console.WriteLine(connString);
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
         services.AddDbContext<AppDbContext>(options => options.UseMySql(connString, serverVersion));
     }
 
