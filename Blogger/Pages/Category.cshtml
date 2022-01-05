@@ -16,8 +16,8 @@
    @foreach(var article in Model.Articles) {
        <div class="article">
            <div class=headerContainer>
-                <h2>@article.Title</h2>
                 <small>@article.Category</small>
+                <h2>@article.Title</h2>
            </div>
            <small>@article.Author - @article.Timestamp</small>
            <p>@article.Text</p>
