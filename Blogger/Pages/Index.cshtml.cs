@@ -12,6 +12,7 @@ namespace Blogger.Pages
         private readonly ArticleService _articleService;
 
         public ICollection<ArticleViewModel> Articles { get; set; }
+        public int ArticleCount { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, ArticleService articleService)
         {
@@ -21,6 +22,7 @@ namespace Blogger.Pages
 
         public async Task OnGetAsync()
         {
+            ArticleCount = await _articleService.GetArticlesCount();
             Articles = await _articleService.GetArticles();
         }
     }

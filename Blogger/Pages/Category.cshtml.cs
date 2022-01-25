@@ -21,6 +21,8 @@ namespace Blogger.Pages
 
         public ICollection<ArticleViewModel> Articles { get; set; }
         public string PageCategory { get; set; }
+        public int PageNumber { get; set; }
+        public int ArticleCount { get; set; }
 
         public CategoryModel(ILogger<CategoryModel> logger, ArticleService articleService)
         {
@@ -28,12 +30,16 @@ namespace Blogger.Pages
             _articleService = articleService;
         }
 
-        public async Task OnGetAsync(string category)
+        public async Task OnGetAsync(string category, [FromQuery] int page)
         {
             PageCategory = category;
-
-            Articles = await _articleService.GetArticles(PageCategory);
-
+            if (page == 0)
+            {
+                page = 1;
+            }
+            PageNumber = page;
+            ArticleCount = await _articleService.GetArticlesCount(PageCategory);
+            Articles = await _articleService.GetArticles(PageCategory, page);
         }
 
         public async Task<IActionResult> OnPostAsync(string category)
@@ -43,13 +49,13 @@ namespace Blogger.Pages
 
             if (!ModelState.IsValid)
             {
+                ArticleCount = await _articleService.GetArticlesCount(PageCategory);
                 Articles = await _articleService.GetArticles(PageCategory);
 
                 return Page();
             }
 
             await _articleService.CreateArticle(Input, PageCategory);
-            Articles = await _articleService.GetArticles(PageCategory);
             return RedirectToPage("Category", new { category = category });
         }
 

@@ -9,6 +9,7 @@ namespace Blogger
         public DbSet<Article> Articles { get; set; }
     }
 
+    [Index(nameof(Timestamp))]
     public class Article
     {
         public int ArticleID { get; set; }

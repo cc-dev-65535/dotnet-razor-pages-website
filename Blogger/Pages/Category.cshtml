@@ -24,6 +24,38 @@
        </div>
    }
 </div>
+<div class="paginationContainer">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @{  var hrefPrev = $"/{Model.PageCategory}?page={Model.PageNumber - 1}";
+                if((Model.PageNumber - 1) < 1)
+                {
+                    <li class="page-item disabled"><a class="page-link" href=@hrefPrev>Previous</a></li>
+                } else {
+                    <li class="page-item"><a class="page-link" href=@hrefPrev>Previous</a></li>
+                }
+            }
+            @for(int i = 1; i < (Math.Ceiling(Model.ArticleCount/4.0) + 1); i++) {
+                var href = $"/{Model.PageCategory}?page={@i}";
+                if (Model.PageNumber == @i)
+                {
+                    <li class="page-item active"><a class="page-link" href=@href>@i</a></li>
+                    continue;
+                }
+                <li class="page-item"><a class="page-link" href=@href>@i</a></li>
+            }
+            @{
+                var hrefNext = $"/{Model.PageCategory}?page={Model.PageNumber + 1}";
+                if((Model.PageNumber + 1) > Math.Ceiling(Model.ArticleCount/4.0))
+                {
+                    <li class="page-item disabled"><a class="page-link" href=@hrefNext>Next</a></li>
+                } else {
+                    <li class="page-item"><a class="page-link" href=@hrefNext>Next</a></li>
+                }
+            }
+        </ul>
+    </nav>
+</div>
 <div class="postForm">
     <form class="formInput" method="post">
       <ul class=formList>

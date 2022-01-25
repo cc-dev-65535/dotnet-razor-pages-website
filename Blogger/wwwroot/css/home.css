@@ -1,10 +1,4 @@
-﻿@media (max-width: 768px) {
-    .flexLayoutContainer {
-        flex-direction: column;
-    }
-}
-
-.leftLayoutContainer {
+﻿.leftLayoutContainer {
     flex: 3;
     border: 2px solid #ccc;
     margin: 10px;
@@ -67,6 +61,11 @@
     font-size: 22px;
 }
 
+.paginationContainer {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .formList {
     list-style-type: none;
     padding: 0;
@@ -113,10 +112,20 @@
     margin: 0 0 1em 0;
     width: 100%;
     overflow: auto;
-    height: 5em;
+    height: 200px;
     resize: none;
 }
 
 .formList span {
     color: red;
+}
+
+@media (max-width: 768px) {
+    .flexLayoutContainer {
+        flex-direction: column;
+    }
+
+    .article h2 {
+        font-size: 16px;
+    }
 }
