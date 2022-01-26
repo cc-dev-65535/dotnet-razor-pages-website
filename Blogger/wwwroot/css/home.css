@@ -61,6 +61,10 @@
     font-size: 22px;
 }
 
+.article small {
+    white-space: pre-wrap;
+}
+
 .paginationContainer {
     margin-left: auto;
     margin-right: auto;

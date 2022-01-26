@@ -30,16 +30,21 @@ namespace Blogger.Pages
             _articleService = articleService;
         }
 
-        public async Task OnGetAsync(string category, [FromQuery] int page)
+        public async Task<IActionResult> OnGetAsync(string category, [FromQuery] int page)
         {
-            PageCategory = category;
+            if (!(page >= 0))
+            {
+                return NotFound();
+            }
             if (page == 0)
             {
                 page = 1;
             }
+            PageCategory = category;
             PageNumber = page;
             ArticleCount = await _articleService.GetArticlesCount(PageCategory);
             Articles = await _articleService.GetArticles(PageCategory, page);
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string category)

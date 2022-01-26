@@ -48,7 +48,7 @@ namespace Blogger
                                      Title = a.Title,
                                      Text = a.Text,
                                      //Timestamp = HelperFunctions.FormatDate(a.Timestamp)
-                                     Timestamp = a.Timestamp.ToString("t") + " " + a.Timestamp.ToString("MMM,dd,yyyy")
+                                     Timestamp = $"{a.Timestamp.ToString("t")}   {a.Timestamp.ToString("MMM,dd,yyyy")}"
                                  })
                                 .ToListAsync();
             }
@@ -66,7 +66,7 @@ namespace Blogger
                                      Title = a.Title,
                                      Text = a.Text,
                                      //Timestamp = HelperFunctions.FormatDate(a.Timestamp)
-                                     Timestamp = a.Timestamp.ToString("t") + " " + a.Timestamp.ToString("MMM,dd,yyyy")
+                                     Timestamp = $"{a.Timestamp.ToString("t")}   {a.Timestamp.ToString("MMM,dd,yyyy")}"
                                  })
                                 .ToListAsync();
         }
