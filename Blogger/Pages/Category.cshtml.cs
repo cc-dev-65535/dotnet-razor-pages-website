@@ -81,28 +81,28 @@ namespace Blogger.Pages
             [Display(Name = "Text")]
             public string Text { get; set; }
         }
-    }
 
-    public class EnsureValidCategoryAttribute: Attribute, IPageFilter
-    {
-        public void OnPageHandlerSelected(PageHandlerSelectedContext context)
+        public class EnsureValidCategoryAttribute : Attribute, IPageFilter
         {
-            
-        }
-
-        public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
-        {
-            Regex regex = new Regex(@"^(gaming|sports|politics|news)$");
-            var category = (string) context.HandlerArguments["category"];
-            if (!regex.IsMatch(category))
+            public void OnPageHandlerSelected(PageHandlerSelectedContext context)
             {
-                context.Result = new NotFoundResult();
-            }
-        }
 
-        public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
-        { 
-        
+            }
+
+            public void OnPageHandlerExecuting(PageHandlerExecutingContext context)
+            {
+                Regex regex = new Regex(@"^(gaming|sports|politics|news)$");
+                var category = (string)context.HandlerArguments["category"];
+                if (!regex.IsMatch(category))
+                {
+                    context.Result = new NotFoundResult();
+                }
+            }
+
+            public void OnPageHandlerExecuted(PageHandlerExecutedContext context)
+            {
+
+            }
         }
     }
 }

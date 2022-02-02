@@ -33,7 +33,6 @@ public class Startup
         });
         services.AddScoped<ArticleService>();
         var connString = Configuration.GetConnectionString("DefaultConnection");
-        //Console.WriteLine(connString);
         var serverVersion = new MySqlServerVersion(new Version(8, 0, 21));
         services.AddDbContext<AppDbContext>(options => options.UseMySql(connString, serverVersion));
     }
