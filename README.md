@@ -2,7 +2,7 @@
 Forum/blog-type web application created with ASP.NET Core Razor Pages.
 
 [Website Link](https://blogger20211231155421.azurewebsites.net)  
-[Git Repo](https://github.com/collinc1212/razor_pages_website)  
+[Git Repo](https://github.com/grepsedawkcat/razor_pages_website)  
 
 ## Details
 * Uses Entity Framework Core and a MySQL database for storage
